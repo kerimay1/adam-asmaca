@@ -79,14 +79,14 @@ while True:
         print(resim[adim])
         for i, char in enumerate(kelime): # i index numarası char kelimenin harfi
             print(Fore.BLACK + Back.LIGHTCYAN_EX + char + Style.RESET_ALL if i in tahmin else Fore.BLACK + Back.LIGHTCYAN_EX + "_"+ Style.RESET_ALL,end=" ")
-        print()
+
+        print("harf sayısı:",len(kelime))
+        
         if not harfler == []:
             print("Kullandığınız harfler:", end=" ")
             for char in harfler:
                 print(char, end= "")
             print()
-
-        print("harf sayısı:",len(kelime))
         while True:
             secim = input("harf >>>  1 veya kelime tahmini>>> 2 ")
             if secim.isdigit():
