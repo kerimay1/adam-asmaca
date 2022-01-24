@@ -2,7 +2,7 @@ import random
 import colorama
 from colorama import Fore, Back, Style, init
 
-resim = ["""
+pictures = ["""
    +---+
    |   |
        |
@@ -56,7 +56,7 @@ resim = ["""
 while True:
     print(("----->") + "Adam Asmaca Oyunu" + ("<-----"))
 
-    kelime = random.choice(["alfabe", "abide", "anıt", "acayip", "garip",
+    word = random.choice(["alfabe", "abide", "anıt", "acayip", "garip",
 "acıma", "merhamet", "açıkgöz", "kurnaz", "isim", "adale", "affetmek", "bağışlamak",
 "kırmızı","alelade","sıradan","iltihap", "girişken","bağışlamak","bayındır","veteriner",
 "bellek","beyanat","zavallı","meridyen","operatör","yürekli","ağırbaşlı","cimri","mühendis",
@@ -69,60 +69,60 @@ while True:
 "sürekli","sorumluluk","kuşku","kutlama","uçurum","millet","memleket","vilayet","arlıklı",
 "dönemeç","vaziyet","karat","zorunlu","zeybek","zehir","metelik","subay","ziraat","zırnık",
 "patlama"])
-    adim = 0
-    tahmin = []
-    durum = True
-    kont = True
-    harfler = []
+    step = 0
+    guess = []
+    status = True
+    check = True
+    letters = []
 
     while True:
-        print(resim[adim])
-        for i, char in enumerate(kelime): # i index numarası char kelimenin harfi
-            print(Fore.BLACK + Back.LIGHTCYAN_EX + char + Style.RESET_ALL if i in tahmin else Fore.BLACK + Back.LIGHTCYAN_EX + "_"+ Style.RESET_ALL,end=" ")
+        print(pictures[step])
+        for i, char in enumerate(word): # i index numarası char kelimenin harfi
+            print(Fore.BLACK + Back.LIGHTCYAN_EX + char + Style.RESET_ALL if i in guess else Fore.BLACK + Back.LIGHTCYAN_EX + "_"+ Style.RESET_ALL,end=" ")
 
-        print("harf sayısı:",len(kelime))
+        print("harf sayısı:",len(word))
         
-        if not harfler == []:
+        if not letters == []:
             print("Kullandığınız harfler:", end=" ")
-            for char in harfler:
+            for char in letters:
                 print(char, end= "")
             print()
         while True:
-            secim = input("harf >>>  1 veya kelime tahmini>>> 2 ")
-            if secim.isdigit():
-                secim = int(secim)
-                if secim == 1:
-                    cevap = input("Harf giriniz: ")
-                    cevap = cevap[0]
-                    harfler.append(cevap)
+            choice = input("harf >>>  1 veya kelime tahmini>>> 2 ")
+            if choice.isdigit():
+                choice = int(choice)
+                if choice == 1:
+                    answer = input("Harf giriniz: ")
+                    answer = answer[0]
+                    letters.append(answer)
                     break
-                elif secim == 2:
-                    soncevap = input("Kelimeyi Tahmin Edin: ")
-                    if soncevap == kelime:
+                elif choice == 2:
+                    lastAnswer = input("Kelimeyi Tahmin Edin: ")
+                    if lastAnswer == word:
                         print(Fore.WHITE + Back.GREEN + "Kazandınız...." + Style.RESET_ALL)
-                        durum = False
+                        status = False
                         break
                     else:
                         print(Fore.WHITE + Back.RED + "malesef yanlış cevap.." + Style.RESET_ALL)
                         break
 
-        if secim == 1:
-            for i, char in enumerate(kelime):
-                if cevap == char:
-                    tahmin.append(i)
-                    kont = False
+        if choice == 1:
+            for i, char in enumerate(word):
+                if answer == char:
+                    guess.append(i)
+                    check = False
                 else:
-                    tahmin.append("-")
-            if kont:
-                adim += 1
-            kont = True
-        elif durum:
-            adim += 1
+                    guess.append("-")
+            if check:
+                step += 1
+            check = True
+        elif status:
+            step += 1
         else:
             break
-        if adim >= len(resim):
+        if step >= len(pictures):
             print(Fore.WHITE + Back.BLACK + "Kaybettiniz....." + Style.RESET_ALL)
-            print("Doğru cevap",Fore.WHITE + Back.RED + kelime + Style.RESET_ALL,"olacaktı.")
+            print("Doğru cevap",Fore.WHITE + Back.RED + word + Style.RESET_ALL,"olacaktı.")
             break
 
     if not "e" == input("Tekrar Oynamak İstermisiniz? (e/h): "):
