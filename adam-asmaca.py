@@ -1,82 +1,19 @@
-import random
-import colorama
-from colorama import Fore, Back, Style, init
-
-pictures = ["""
-   +---+
-   |   |
-       |
-       |
-       |
-       |
---------""","""
-   +---+
-   |   |
-   O   |
-       |
-       |
-       |
---------""","""
-   +---+
-   |   |
-   O   |
-   |   |
-       |
-       |
---------""","""
-   +---+
-   |   |
-   O   |
-  /|   |
-       |
-       |
---------""","""
-   +---+
-   |   |
-   O   |
-  /|\  |
-       |
-       |
---------""","""
-   +---+
-   |   |
-   O   |
-  /|\  |
-  /    |
-       |
---------""","""
-   +---+
-   |   |
-   O   |
-  /|\  |
-  / \  |
-       |
---------"""]
+from colorama import Fore, Back, Style
+from pictures import Pictures
+from word import getWord
 
 while True:
     print(("----->") + "Adam Asmaca Oyunu" + ("<-----"))
 
-    word = random.choice(["alfabe", "abide", "anıt", "acayip", "garip",
-"acıma", "merhamet", "açıkgöz", "kurnaz", "isim", "adale", "affetmek", "bağışlamak",
-"kırmızı","alelade","sıradan","iltihap", "girişken","bağışlamak","bayındır","veteriner",
-"bellek","beyanat","zavallı","meridyen","operatör","yürekli","ağırbaşlı","cimri","mühendis",
-"ekseriyet","darılmak","kıymetli","vaziyet","arkadaş","eklem","ekonomi","güvenlik","endüstri",
-"enteresan","faaliyet","garip","istikbal","dilbilgisi","kuvvetli","sonbahar","komedi","duygulu",
-"haysiyet","kaplıca","karakter","samimi","yönetim","ihracat","ihtiyaç","sandalye","açıklama",
-"ithalat","yetenek","karabasan","sermaye","kuruluş","gereksiz","tapınak","hapishane","yaratık",
-"basımevi","milletvekili","uygarlık","yardımcı","bağımsız","öğretmen","rutubet","Nasihat",
-"mükafat","hiddet","öğrenim","teşkilat","orijinal","ayakkabı","siyaset","rastlantı","Saldırı",
-"sürekli","sorumluluk","kuşku","kutlama","uçurum","millet","memleket","vilayet","arlıklı",
-"dönemeç","vaziyet","karat","zorunlu","zeybek","zehir","metelik","subay","ziraat","zırnık",
-"patlama"])
-    step = 0
+    word = getWord()
+    pic = Pictures()
     guess = []
     status = True
     check = True
     letters = []
 
     while True:
-        print(pictures[step])
+        print(pic.getPicture())
         for i, char in enumerate(word): # i index numarası char kelimenin harfi
             print(Fore.BLACK + Back.LIGHTCYAN_EX + char + Style.RESET_ALL if i in guess else Fore.BLACK + Back.LIGHTCYAN_EX + "_"+ Style.RESET_ALL,end=" ")
 
@@ -114,13 +51,13 @@ while True:
                 else:
                     guess.append("-")
             if check:
-                step += 1
+                pic.nextStep()
             check = True
         elif status:
-            step += 1
+            pic.nextStep()
         else:
             break
-        if step >= len(pictures):
+        if pic.isEnd():
             print(Fore.WHITE + Back.BLACK + "Kaybettiniz....." + Style.RESET_ALL)
             print("Doğru cevap",Fore.WHITE + Back.RED + word + Style.RESET_ALL,"olacaktı.")
             break
